@@ -84,14 +84,17 @@ function createBody(astro, name) {
     // Load texture and bump map
     let textureMap = new THREE.TextureLoader().load(astro.textureUrl);
     let material;
-    if(astro.bumpMapUrl) {
-        console.log('adding bump')
-        let bumpMap = new THREE.TextureLoader().load(astro.bumpMapUrl);
-        material = new THREE.MeshBasicMaterial({map: textureMap, bumpMap: bumpMap});
-    } else {
+    if(name === 'sun') {
         material = new THREE.MeshBasicMaterial({map: textureMap});
-
+    } else {
+        if(astro.bumpMapUrl) {
+            let bumpMap = new THREE.TextureLoader().load(astro.bumpMapUrl);
+            material = new THREE.MeshPhongMaterial({map: textureMap, bumpMap: bumpMap});
+        } else {
+            material = new THREE.MeshPhongMaterial({map: textureMap});
+        }
     }
+    
 
     // Create mesh object and put it in position
     let body = new THREE.Mesh(geometry, material);
@@ -143,7 +146,7 @@ function createMoon(radius) {
     // Create material
     let textureMap = new THREE.TextureLoader().load("../images/moonmap.jpg");
     let bumpMap = new THREE.TextureLoader().load("../images/moonmap.jpg");
-    let material = new THREE.MeshBasicMaterial({map: textureMap, bumpMap: bumpMap});
+    let material = new THREE.MeshPhongMaterial({map: textureMap, bumpMap: bumpMap});
 
     let body = new THREE.Mesh(geometry, material);
     body.scale.set(radius, radius, radius);
@@ -160,7 +163,7 @@ function createRing(ringConfig) {
 
     // Create material
     let textureMap = new THREE.TextureLoader().load(ringConfig.textureUrl);
-    let material = new THREE.MeshBasicMaterial({map: textureMap, side: THREE.DoubleSide});
+    let material = new THREE.MeshPhongMaterial({map: textureMap, side: THREE.DoubleSide});
 
     let body = new THREE.Mesh(geometry, material);
     return body;
@@ -187,6 +190,7 @@ function loadAsteroidObj(callback, innerDistance, outerDistance, asteroids) {
  * Creates the asteroid field from an inside distance to an outside distance.
  */
 function createAsteroidField(innerDistance, outerDistance, asteroids, object) {
+    console.log('teest')
     for(let i=0; i < asteroids; i++) {
         // Create new asteroid
         let asteroid =  object.children[0].clone();
@@ -200,8 +204,8 @@ function createAsteroidField(innerDistance, outerDistance, asteroids, object) {
         asteroid.position.z = Math.sin(i) * distance;
 
         // Make small scale so objects are visible
-        asteroid.scale.set(0.0005, 0.0005, 0.0005);
-        mainGroup.children[1].add(asteroid);
+        asteroid.scale.set(0.0008, 0.0008, 0.0008);
+        mainGroup.children[0].add(asteroid);
     }
 }
 
@@ -240,15 +244,15 @@ function createScene(canvas) {
     // Create main group
     mainGroup = new THREE.Object3D;
 
-    // Configure light based on the sun
-    let light = new THREE.PointLight(0x0000ff, 1, 20);
-    light.position.set(astros.sun.position);
-    mainGroup.add(light)
-
     // Create bodies.
     for(var astro in astros) {
         let body = createBody(astros[astro], astro);
     }
+
+    // Configure light based on the sun
+    let light = new THREE.PointLight( 0xffffff, 3, 0);
+    mainGroup.children[0].add(light);
+    console.log(mainGroup.children)
 
     // Create background
     setupBackground();
