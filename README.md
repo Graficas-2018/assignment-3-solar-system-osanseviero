@@ -15,3 +15,12 @@ Rubric:
 - Most textures can be found here: http://planetpixelemporium.com/
 - The rotation of the system has to be controlled with the left mouse button, while the panning has to be controlled with the right mouse button. Scale of the scene can be controlled as in the examples.
 
+Checklist
+- Planets created with their own textures, rotation speeds, and sizes.
+- Variable size moons in the corresponding planets.
+- Rings with own rotation for Saturn and Uranus.
+- Planets rotate around sun and moons around planets.
+- Add rotating background.
+- Add handling rotation and translation in x and y axis, plus scaling with slider.
+- Load obj file for asteroid fields. Use callback to only load it once and then create clones.
+- Add orbit indicator showing path.
