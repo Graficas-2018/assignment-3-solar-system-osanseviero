@@ -81,12 +81,20 @@ function createBody(astro, name) {
     // Create geometry
     let geometry = new THREE.SphereGeometry(1, 30, 30);
 
-    // Load texture
+    // Load texture and bump map
     let textureMap = new THREE.TextureLoader().load(astro.textureUrl);
-    astro.material = new THREE.MeshBasicMaterial({map: textureMap});
+    let material;
+    if(astro.bumpMapUrl) {
+        console.log('adding bump')
+        let bumpMap = new THREE.TextureLoader().load(astro.bumpMapUrl);
+        material = new THREE.MeshBasicMaterial({map: textureMap, bumpMap: bumpMap});
+    } else {
+        material = new THREE.MeshBasicMaterial({map: textureMap});
+
+    }
 
     // Create mesh object and put it in position
-    let body = new THREE.Mesh(geometry, astro.material);
+    let body = new THREE.Mesh(geometry, material);
     body.scale.set(astro.radius, astro.radius, astro.radius);
     body.name = name;
 
@@ -134,7 +142,8 @@ function createMoon(radius) {
 
     // Create material
     let textureMap = new THREE.TextureLoader().load("../images/moonmap.jpg");
-    let material = new THREE.MeshBasicMaterial({map: textureMap});
+    let bumpMap = new THREE.TextureLoader().load("../images/moonmap.jpg");
+    let material = new THREE.MeshBasicMaterial({map: textureMap, bumpMap: bumpMap});
 
     let body = new THREE.Mesh(geometry, material);
     body.scale.set(radius, radius, radius);

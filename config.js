@@ -18,7 +18,8 @@ let astros = {
         rotationDays: 200
     },
     mercury: {
-    	textureUrl: "../images/mercurymap.jpg",
+        textureUrl: "../images/mercurymap.jpg",
+    	bumpMapUrl: "../images/mercurybump.jpg",
         radius: 0.2440, //.2440 * 10K km
         rotationDays: 58.6,
         orbitDays: 87.97,
@@ -26,6 +27,7 @@ let astros = {
     },
     venus: {
         textureUrl: "../images/venusmap.jpg",
+        bumpMapUrl: "../images/venusbump.jpg",
         radius: 0.6052, //.6052* 10K km
         rotationDays: 243,
         orbitDays: 224.7,
@@ -33,6 +35,7 @@ let astros = {
     },
     earth: {
         textureUrl: "../images/earthmap.jpg",
+        bumpMapUrl: "../images/earthbump1k.jpg",
         radius: 0.6371, //.6371* 10K km,
         rotationDays: 1,
         orbitDays: 365,
@@ -43,6 +46,7 @@ let astros = {
     },
     mars: {
         textureUrl: "../images/marsmap.jpg",
+        bumpMapUrl: "../images/marsbump1k.jpg",
         radius: 0.3390, //.3390* 10K km
         rotationDays: 1.03,
         orbitDays: 686.2,
@@ -84,7 +88,7 @@ let astros = {
             [0, 1.5, 1, 0.1, 10],
         ],
         ring: {
-            textureUrl: "../images/saturnringmap.jpg",
+            textureUrl: "../images/saturnringcolor.jpg",
             insideRadius: 1.5,
             outsideRadius: 1.75,
             initialRotation: [180, 0, 0]
@@ -104,7 +108,7 @@ let astros = {
             [-0.7, -0.7, -0.7, 0.01, 8],
         ],
         ring: {
-            textureUrl: "../images/uranusringmap.jpg",
+            textureUrl: "../images/uranusringcolor.jpg",
             insideRadius: 1.5,
             outsideRadius: 2,
             initialRotation: [25, 25, 0]
@@ -126,6 +130,7 @@ let astros = {
     },
     pluto: {
         textureUrl: "../images/plutomap.jpg",
+        bumpMapUrl: "../images/plutobump.jpg",
         radius: 0.2440, // Upscaled so it can be seen
         rotationDays: 6.39,
         orbitDays: 90735.35,
