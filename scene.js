@@ -5,14 +5,14 @@ let camera;
 let mainGroup;
 let renderer = null;
 let scene;
-let speed = 10;
 let backgroundSphere;
 
 /*
  * Calculate how many radians to rotate the astro body in each animate call.
  * The function uses Earth days to know how long to rotate. It assumes 60
  * frames per second, which is not accurate. A maximum speed is assigned so
- * moons are visible in planets that rotate really fast. A 10x speed is used.
+ * moons are visible in planets that rotate really fast. A 10x speed is used
+ * for rotation.
  */
 function getRadiansForRotation(days) {
     // Frames per second is not accurate
@@ -20,7 +20,7 @@ function getRadiansForRotation(days) {
 
     // Get rotational speed using 10x speed.
     rotationalSpeed = (2 * Math.PI) / (days/10);
-    return Math.min((rotationalSpeed)/framesPerSec, 0.1);
+    return speed * Math.min((rotationalSpeed)/framesPerSec, 0.1);
 }
 
 /*
@@ -43,7 +43,7 @@ function animate(element) {
             element.rotation.y += getRadiansForRotation(astros[element.name].rotationDays);
             // Only rotate planets around sun
             if(element.name !== "sun") {
-                let date = Date.now() * 0.1;
+                let date = Date.now() * 0.1 * speed;
                 let orbitDays = astros[element.name].orbitDays;
                 let orbitRadius = astros[element.name].orbitRadius;
 
@@ -60,9 +60,6 @@ function animate(element) {
                     if(astros[element.name].moons[child]) {
                         let rotationDays = [4];
                         element.children[child].rotation.y += getRadiansForRotation(rotationDays);
-                    }
-                    else {
-                        element.children[child].rotation.z += Math.PI/128;
                     }
                 }
             }
@@ -190,7 +187,6 @@ function loadAsteroidObj(callback, innerDistance, outerDistance, asteroids) {
  * Creates the asteroid field from an inside distance to an outside distance.
  */
 function createAsteroidField(innerDistance, outerDistance, asteroids, object) {
-    console.log('teest')
     for(let i=0; i < asteroids; i++) {
         // Create new asteroid
         let asteroid =  object.children[0].clone();
@@ -252,7 +248,6 @@ function createScene(canvas) {
     // Configure light based on the sun
     let light = new THREE.PointLight( 0xffffff, 3, 0);
     mainGroup.children[0].add(light);
-    console.log(mainGroup.children)
 
     // Create background
     setupBackground();

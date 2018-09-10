@@ -24,3 +24,5 @@ Checklist
 - Add handling rotation and translation in x and y axis, plus scaling with slider.
 - Load obj file for asteroid fields. Use callback to only load it once and then create clones.
 - Add orbit indicator showing path.
+- Add correct light.
+- Change time with scrolling

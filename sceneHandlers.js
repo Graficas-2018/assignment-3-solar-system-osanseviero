@@ -5,6 +5,7 @@
 
 // An integer value, in pixels, indicating the X coordinate at which the mouse pointer was located when the event occurred. 
 let mouseDown = false, pageX = 0, pageY;
+let speed = 1;
 
 function rotateScene(deltax, deltay) {
     mainGroup.rotation.y += deltax / 100;
@@ -57,6 +58,17 @@ function onMouseUp(evt) {
     mouseDown = false;
 }
 
+function onScrollChange(evt) {
+    if(evt.deltaY < 0) {
+        speed += 0.1;
+    } else {
+        speed -= 0.1;
+    }
+    speed = Math.max(speed, 0);
+    speed = Math.min(speed, 20);
+    $("#speed").html("speed: " + speed.toFixed(1));
+}
+
 function addMouseHandler(canvas) {
     canvas.addEventListener( 'mousemove', 
             function(e) { onMouseMove(e); }, false );
@@ -64,5 +76,7 @@ function addMouseHandler(canvas) {
             function(e) { onMouseDown(e); }, false );
     canvas.addEventListener( 'mouseup', 
             function(e) { onMouseUp(e); }, false );
+    canvas.addEventListener( 'wheel', 
+            function(e) { onScrollChange(e) }, false );
     canvas.addEventListener('contextmenu', event => event.preventDefault()); // Allows to use right click
 }

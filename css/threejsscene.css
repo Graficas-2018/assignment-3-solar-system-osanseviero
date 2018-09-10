@@ -21,7 +21,7 @@
 
 #status {
 	position:absolute;
-	bottom:20px;
+	bottom:40px;
 	width:200px;
 	height:40px;
 	right:20px;
@@ -38,6 +38,12 @@
 	position:absolute;
 	left:20px;
 	top:20px;
+}
+
+#speed {
+	position:absolute;
+	left:20px;
+	top:40px;
 }
 
 #slider {
