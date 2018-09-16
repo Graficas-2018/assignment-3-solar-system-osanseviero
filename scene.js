@@ -141,8 +141,8 @@ function createMoon(radius) {
     let geometry = new THREE.SphereGeometry(1, 20, 20);
 
     // Create material
-    let textureMap = new THREE.TextureLoader().load("../images/moonmap.jpg");
-    let bumpMap = new THREE.TextureLoader().load("../images/moonmap.jpg");
+    let textureMap = new THREE.TextureLoader().load("images/moonmap.jpg");
+    let bumpMap = new THREE.TextureLoader().load("images/moonmap.jpg");
     let material = new THREE.MeshPhongMaterial({map: textureMap, bumpMap: bumpMap});
 
     let body = new THREE.Mesh(geometry, material);
@@ -213,7 +213,7 @@ function setupBackground() {
     backgroundSphere = new THREE.Mesh(
         new THREE.SphereGeometry(1500,100,100),
         new THREE.MeshBasicMaterial({
-            map: (new THREE.TextureLoader).load("../images/spacemap.jpg"),
+            map: (new THREE.TextureLoader).load("images/spacemap.jpg"),
             side: THREE.DoubleSide
         })
     );
